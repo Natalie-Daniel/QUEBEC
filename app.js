@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express = require('express')
 const app = express()
 const port = process.env.port || 3000;
@@ -35,13 +34,13 @@ app.get('/', (req, res) => {
 
 app.get('/mongo', async (req, res) => {
 
-  res.send("check node console")
+  //res.send("check node console")
 
   let result = await cxnDB().catch(console.error); 
 
   console.log('in get to slash mongo', result[1].Name);
 
-  res.send(`Here ya go, Frosty., ${ result[1].Name }`)
+  res.send(`here ya go, Frosty. ${ result[1].Name }` ); 
 });
 
 console.log('in the node console');
