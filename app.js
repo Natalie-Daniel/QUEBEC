@@ -3,12 +3,12 @@ const express = require('express')
 const app = express()
 const port = process.env.port || 3000;
 const bodyParser = require('body-parser')
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://nbrown7:UNAlions1122@cluster0.x48nd31.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+const client = new MongoClient(process.env.MONGO_URI , { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 app.use(bodyParser.urlencoded({ extended: true }))
+
+app.set('view engine', 'ejs');
 
 async function cxnDB(){
 
@@ -29,8 +29,11 @@ async function cxnDB(){
   }
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello World! Frosty Here! <br/> <a href="mongo">mongo</a>')
+app.post('ejs', (req, res) => {
+  //res.send('Hello World! Frosty Here! <br/> <a href="mongo">mongo</a>')
+  res.render('index');
+  
+  
 })
 
 app.get('/mongo', async (req, res) => {
@@ -43,6 +46,17 @@ app.get('/mongo', async (req, res) => {
 
   res.send(`here ya go, Frosty. ${ result[1].Name }` ); 
 });
+
+app.get('/update', (req, res) => {
+
+//get data from form
+
+console.log("in get to slash name:", req.query.ejsFormName); 
+myName = req.query.ejsFormName; 
+
+//update in the databse
+
+})
 
 console.log('in the node console');
 
