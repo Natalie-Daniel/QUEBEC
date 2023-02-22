@@ -29,7 +29,7 @@ async function cxnDB(){
   }
 }
 
-app.post('ejs', (req, res) => {
+app.get('/', (req, res) => {
   //res.send('Hello World! Frosty Here! <br/> <a href="mongo">mongo</a>')
   res.render('index');
   
@@ -45,16 +45,22 @@ app.get('/mongo', async (req, res) => {
   console.log('in get to slash mongo', result[1].Name);
 
   res.send(`here ya go, Frosty. ${ result[1].Name }` ); 
-});
+})
 
-app.get('/update', (req, res) => {
+app.get('/update', async (req, res) => {
 
 //get data from form
 
-console.log("in get to slash name:", req.query.ejsFormName); 
+console.log("in get to slash update:", req.query.ejsFormName); 
 myName = req.query.ejsFormName; 
 
 //update in the databse
+
+client.connect;
+const collection = client.db("chillAppz").collection("food");
+await collection.insertOne({
+  Name: "Sushi"
+})
 
 })
 
