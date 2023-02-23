@@ -64,8 +64,26 @@ await collection.insertOne({
 
 })
 
+app.get('/delete', async (req, res) => {
+
+  //get data from form
+  
+  console.log("in get to slash delete:", req.query.ejsDelete); 
+  myName = req.query.ejsDelete; 
+  
+  //delete from collection
+  
+  client.connect;
+  const collection = client.db("chillAppz").collection("food");
+  await collection.deleteOne({
+    Name: "Sushi"
+})
+  
+})
+
 console.log('in the node console');
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
