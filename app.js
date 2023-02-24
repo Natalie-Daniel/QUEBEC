@@ -93,7 +93,7 @@ app.get('/delete', async (req, res) => {
   client.connect;
   const collection = client.db("chillAppz").collection("food");
   await collection.deleteOne({
-    Name: "Frosty"
+    Name: "Chicken Wings"
 })
   
 })
@@ -105,13 +105,14 @@ app.get('/update', async (req, res) => {
   console.log("Collection Updated", req.query.ejsUpdate); 
   myName = req.query.ejsUpdate; 
   
-  //delete from collection
+  //Update the collection
   
   client.connect;
   const collection = client.db("chillAppz").collection("food");
   await collection.updateOne(
-    { "Name" : "Pizza" },
-    { $set: { "Name" : "Fries" } }
+    { "Name" : "Fries" },
+    { $set: { "Calories" : "200" } }
+
   )
 })
 
