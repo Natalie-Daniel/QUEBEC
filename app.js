@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = process.env.port || 3000;
 const bodyParser = require('body-parser')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const client = new MongoClient(process.env.MONGO_URI , { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -31,9 +31,7 @@ async function cxnDB(){
 
 app.get('/', (req, res) => {
   //res.send('Hello World! Frosty Here! <br/> <a href="mongo">mongo</a>')
-  res.render('index');
-  
-  
+  res.render('index')
 })
 
 app.get('/mongo', async (req, res) => {
@@ -47,20 +45,39 @@ app.get('/mongo', async (req, res) => {
   res.send(`here ya go, Frosty. ${ result[1].Name }` ); 
 })
 
-app.get('/update', async (req, res) => {
+//app.get('/create', async (req, res) => {
 
 //get data from form
 
-console.log("in get to slash update:", req.query.ejsFormName); 
-myName = req.query.ejsFormName; 
+//console.log("in get to slash create:", req.query.ejsFormName); 
+//myName = req.query.ejsFormName; 
 
-//update in the databse
+//create in the databse
 
-client.connect;
-const collection = client.db("chillAppz").collection("food");
-await collection.insertOne({
-  Name: "Sushi"
-})
+//client.connect;
+//const collection = client.db("chillAppz").collection("food");
+//await collection.insertOne({
+//  Name: "Sushi"
+//})
+
+//})
+
+app.post('/addFood', async (req, res) => {
+
+  try {
+    // console.log("req.body: ", req.body) 
+    client.connect; 
+    const collection = client.db("chillAppz").collection("food");
+    await collection.insertOne(req.body);
+      
+    res.redirect('/');
+  }
+  catch(e){
+    console.log(error)
+  }
+  finally{
+   // client.close()
+  }
 
 })
 
@@ -76,14 +93,35 @@ app.get('/delete', async (req, res) => {
   client.connect;
   const collection = client.db("chillAppz").collection("food");
   await collection.deleteOne({
-    Name: "Sushi"
+    Name: "Frosty"
 })
   
 })
 
+app.get('/update', async (req, res) => {
+
+  //get data from form
+  
+  console.log("Collection Updated", req.query.ejsUpdate); 
+  myName = req.query.ejsUpdate; 
+  
+  //delete from collection
+  
+  client.connect;
+  const collection = client.db("chillAppz").collection("food");
+  await collection.updateOne(
+    { "Name" : "Pizza" },
+    { $set: { "Name" : "Fries" } }
+  )
+})
+
+  
+  
 console.log('in the node console');
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
 
