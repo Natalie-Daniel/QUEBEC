@@ -7,27 +7,41 @@
   </form>
 -->
 
-  <h2>Add New Food to Database</h2>
+<h3> Current Food on hand</h3> 
+<% for (var i=0; i< foodData.length; i++ ) { %>
+ <form method="post" action="/deletefood/<%= foodData[i]._id %>" style="display: inline-block">  
+   <%= foodData[i].food_name %> (<%= foodData[i].Calories %>) 
+   <input type="submit" value="delete"> 
+ </form>
+ <br/>
+<% } %> 
+
+<h2>Add New Food to Database</h2>
 
   <form method="post" action="/addFood">
-    <label for="Name">Food</label><br>
-    <input name="Name"><br>
-    <label for="Calories">Calories</label><br>
-    <input name="Calories"><br> 
+    <label for="food_name">Food</label>
     <br>
-    <input type="submit" value="add new food">
+      <input name="food_name" value="new_food">
+    <br>
+    <label for="Calories">Calories</label>
+    <br>
+      <input name="Calories" value="amount">
+    <br>
+    <br>
+    <input type="submit" value="Add new Food">
 </form>
 
-  <form method="get" action="/delete">
+  <!--<form method="get" action="/delete">
     <h2>Delete From Database</h2>
-    <input type="text" name="ejsDelete" value="Delete"> 
+      <input type="text" name="ejsDelete" value="Delete"> 
     <input type="submit">
-  </form>
+  </form>-->
 
-  <form method="get" action="/update">
+  <!--<form method="get" action="/update">
     <h2>Update the Database</h2>
     <input type="text" name="ejsUpdate" value="Update"> 
     <input type="submit">
-  </form>
+  </form
+  -->
 
 
