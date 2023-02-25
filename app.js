@@ -49,13 +49,13 @@ app.get('/', async (req, res) => {
 
 app.get('/mongo', async (req, res) => {
 
-  // res.send("check your node console, bro");
+  // res.send("check your node console");
 
   let result = await cxnDB().catch(console.error); 
 
-  console.log('in get to slash mongo', result[1].drink_name); 
+  console.log('in get to slash mongo', result[1].food_name); 
 
-  res.send(`here ya go, Frosty. ${ result[1].drink_name }` ); 
+  res.send(`here ya go, Frosty. ${ result[1].food_name }` ); 
 
 })
 
