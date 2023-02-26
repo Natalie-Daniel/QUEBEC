@@ -7,11 +7,20 @@
   </form>
 -->
 
-<h3> Current Food on hand</h3> 
+<h3> Current Food on hand with Calories</h3> 
 <% for (var i=0; i< foodData.length; i++ ) { %>
  <form method="post" action="/deletefood/<%= foodData[i]._id %>" style="display: inline-block">  
    <%= foodData[i].food_name %> (<%= foodData[i].Calories %>) 
    <input type="submit" value="delete"> 
+ </form>
+ <br/>
+<% } %> 
+
+<h3> Current Food on hand with Calories</h3> 
+<% for (var i=0; i< foodData.length; i++ ) { %>
+ <form method="post" action="/updatefood/<%= foodData[i]._id %>" style="display: inline-block">  
+   <%= foodData[i].food_name %> (<%= foodData[i].Calories %>) 
+   <input type="submit" value="update"> 
  </form>
  <br/>
 <% } %> 

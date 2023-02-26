@@ -115,6 +115,26 @@ app.post('/deletefood/:id', async (req, res) => {
 
 })
 
+app.post('/updatefood/:id', async (req, res) => {
+
+  try {
+    console.log("req.parms.id: ", req.params.id) 
+    
+    client.connect; 
+    const collection = client.db("chillAppz").collection("food");
+    let result = await collection.findOneAndUpdate( { _id: new ObjectId( req.params.id) })
+    .then(result => {
+      console.log(result); 
+      res.redirect('/');
+    })
+    .catch(error => console.error(error))
+  }
+  finally{
+    //client.close()
+  }
+
+})
+
 
 console.log('in the node console');
 
